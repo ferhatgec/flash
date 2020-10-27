@@ -80,7 +80,13 @@ func -> TerminalBuffer() {
 	
 	print(rcolorized[:11, 93:])
 	print(spec) -> __HOSTNAME__ <-
+
+	print(string) -> " ~"
+		
+	print(rcolorized[:11, 94:])
+	@echo -> current_dir <-
 	
+	print(rcolorized[:11, 97:])
 	put[_defs -> Input_Sign <-]
 	print(string) -> " "
 	
@@ -89,6 +95,7 @@ func -> TerminalBuffer() {
 main() -> main {
 	var(int) -> 3.14 -> loopVal <-
 	var(string) -> blah blah -> input_word <- 
+	var(string) -> (func) getenv -> "PWD" (end) -> current_dir <- 
 	
 	statement[#buffer_loop]
 	
