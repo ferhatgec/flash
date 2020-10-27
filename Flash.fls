@@ -10,6 +10,9 @@ except(version) : 0.3 -> { error("Install new version of FlaScript") print(newli
 
 import("Types.flsh") -> _defs <-
 
+/> asdasd</
+
+import("Types.flsh") -> _defs <-
 func -> Execute() {
 	/> Get reference of input word */
 	executepp("FlaSh", var(input_word))
@@ -39,7 +42,7 @@ func -> Execute() {
 
 #buffer_loop ->
 	while[var(int) -> loopVal <- (==) var(int) -> 3.14 <-] -> {
-		func -> terminalBuffer()
+		func -> TerminalBuffer()
 		
 		/> Colorize input */
 		print(rcolorized[:1, 92:])
@@ -56,14 +59,26 @@ func -> Execute() {
 		print(string) -> "Failed."
 	} <-
 #buffer_loop <-
+
+
+func -> TerminalBuffer() {
+	print(rcolorized[:11, 96:])
+	print(spec) -> __USERNAME__ <-
 	
-func -> terminalBuffer() {
-	print(colorized[:1, 95:]) -> "$# " <-	
-} terminalBuffer;	
+	print(rcolorized[:11, 92:])
+	
+	print(string) -> "~>"
+	
+	print(rcolorized[:11, 93:])
+	print(spec) -> __HOSTNAME__ <-
+	
+	put[_defs -> Input_Sign <-]
+	print(string) -> " "
+	
+} TerminalBuffer;
 	
 main() -> main {
 	var(int) -> 3.14 -> loopVal <-
-	
 	var(string) -> blah blah -> input_word <- 
 	
 	statement[#buffer_loop]

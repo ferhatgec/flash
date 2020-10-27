@@ -6,3 +6,4 @@
 </
 
 defin[Slashn] -> print(newline) <-
+defin[Input_Sign] -> print(string) -> " $# " <-
