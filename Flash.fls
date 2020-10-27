@@ -32,9 +32,9 @@ func -> Execute() {
 
 #exit ->
 	if[var(input_word) == var(exit)] -> {
-		print(string) -> "Exiting.."
+		print(string) -> "Bye.."
 		
-		put[newline]
+		put[_defs -> Slashn <-]
 		
 		exit(success)
 	} else -> { statement[#check_version] } <-
@@ -43,7 +43,7 @@ func -> Execute() {
 #check_command ->
 	if[var(input_word) == var(username)] -> {
 		print(spec) -> __USERNAME__ <-
-		@substring -> input_word -> username <
+		put[_defs -> Slashn <-]
 	} else -> {
 		statement[#exit]		
 	} <-
