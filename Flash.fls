@@ -10,13 +10,25 @@ except(version) : 0.3 -> { error("Install new version of FlaScript") print(newli
 
 import("Types.flsh") -> _defs <-
 
-/> asdasd</
-
-import("Types.flsh") -> _defs <-
 func -> Execute() {
 	/> Get reference of input word */
 	executepp("FlaSh", var(input_word))
 } Execute;
+
+#check_version ->
+	if[var(input_word) == var(version)] -> {
+		print(colorized[:11, 96:]) -> "Flash Version: " <-
+		
+		print(rcolorized[:1, 91:])
+		
+		put[_defs -> Flash_Version <-]
+		
+		put[_defs -> Slashn <-]
+	} else -> {
+		/> Call Execute() (another command) </		
+		func -> Execute()
+	} <-
+#check_version <-
 
 #exit ->
 	if[var(input_word) == var(exit)] -> {
@@ -25,10 +37,7 @@ func -> Execute() {
 		put[newline]
 		
 		exit(success)
-	} else -> {
-		/> Call Execute() (another command) </		
-		func -> Execute()
-	} <-
+	} else -> { statement[#check_version] } <-
 #exit <-
 
 #check_command ->

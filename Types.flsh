@@ -5,5 +5,7 @@
 # 
 </
 
+defin[Flash_Version] -> print(string) -> "0.1-beta-1" <-
+
 defin[Slashn] -> print(newline) <-
 defin[Input_Sign] -> print(string) -> " $# " <-
