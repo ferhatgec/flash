@@ -9,11 +9,21 @@
 except(version) : 0.3 -> { error("Install new version of FlaScript") print(newline) } version;
 
 import("Types.flsh") -> _defs <-
+import("Tools.flsh") -> tools <- 
 
 func -> Execute() {
 	/> Get reference of input word */
 	executepp("FlaSh", var(input_word))
 } Execute;
+
+#uptime ->
+	if[var(input_word) == var(uptime)] -> {
+		put[tools -> func -> Uptime() <-]
+	} else -> {
+		/> Call Execute() (another command) </	
+		func -> Execute()
+	} <-
+#uptime <-
 
 #check_version ->
 	if[var(input_word) == var(version)] -> {
@@ -25,8 +35,7 @@ func -> Execute() {
 		
 		put[_defs -> Slashn <-]
 	} else -> {
-		/> Call Execute() (another command) </		
-		func -> Execute()
+		statement[#uptime]
 	} <-
 #check_version <-
 
@@ -93,6 +102,7 @@ func -> TerminalBuffer() {
 } TerminalBuffer;
 	
 main() -> main {
+        func -> Welcome() : tools <
 	var(int) -> 3.14 -> loopVal <-
 	var(string) -> blah blah -> input_word <- 
 	var(string) -> (func) getenv -> "PWD" (end) -> current_dir <- 
