@@ -10,18 +10,27 @@ except(version) : 0.3 -> { error("Install new version of FlaScript") print(newli
 
 import("Types.flsh") -> _defs <-
 import("Tools.flsh") -> tools <- 
+import("HelpFunction.flsh") -> help <-
 
 func -> Execute() {
 	/> Get reference of input word */
 	executepp("FlaSh", var(input_word))
 } Execute;
 
+#help_function ->
+	if[var(input_word) == var(help)] -> {
+		put[help -> func -> HelpFunction() <-]
+	} else -> {
+		/> Call Execute() (another command) </	
+		func -> Execute()
+	} <-
+#help_function <-
+
 #uptime ->
 	if[var(input_word) == var(uptime)] -> {
 		put[tools -> func -> Uptime() <-]
 	} else -> {
-		/> Call Execute() (another command) </	
-		func -> Execute()
+		statement[#help_function]
 	} <-
 #uptime <-
 
@@ -34,9 +43,7 @@ func -> Execute() {
 		put[_defs -> Flash_Version <-]
 		
 		put[_defs -> Slashn <-]
-	} else -> {
-		statement[#uptime]
-	} <-
+	} else -> { statement[#uptime] } <-
 #check_version <-
 
 #exit ->
@@ -96,7 +103,9 @@ func -> TerminalBuffer() {
 	@echo -> current_dir <-
 	
 	print(rcolorized[:11, 97:])
+	
 	put[_defs -> Input_Sign <-]
+	
 	print(string) -> " "
 	
 } TerminalBuffer;

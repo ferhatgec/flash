@@ -1,0 +1,26 @@
+/> MIT License
+#
+# Copyright (c) 2020 Ferhat Geçdoğan All Rights Reserved.
+# Distributed under the terms of the MIT License.
+# 
+</
+
+except(version) : 0.3 -> { error("Install new version of FlaScript") print(newline) } version;
+
+func -> HelpFunction() {
+	print(colorized[:1, 33:]) -> "[GENERAL]" <-
+	print(newline)
+	
+	print(rcolorized[:1, 95:])
+	
+	print(string) -> "uptime: Show uptime of system"
+	print(newline)
+	
+	print(string) -> "username: Show username"
+	print(newline)
+	
+	print(string) -> "version: Show version of FlaSh"
+	print(colorized[:1, 0:]) -> "" <-
+	
+	print(newline)
+} HelpFunction;
