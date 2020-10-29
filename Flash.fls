@@ -18,7 +18,7 @@ func -> Execute() {
 } Execute;
 
 #help_function ->
-	if[var(input_word) == var(help)] -> {
+	if[var(input_word) == "help"] -> {
 		put[help -> func -> HelpFunction() <-]
 	} else -> {
 		/> Call Execute() (another command) </	
@@ -27,7 +27,7 @@ func -> Execute() {
 #help_function <-
 
 #uptime ->
-	if[var(input_word) == var(uptime)] -> {
+	if[var(input_word) == "uptime"] -> {
 		put[tools -> func -> Uptime() <-]
 	} else -> {
 		statement[#help_function]
@@ -35,13 +35,13 @@ func -> Execute() {
 #uptime <-
 
 #check_version ->
-	if[var(input_word) == var(version)] -> {
+	if[var(input_word) == "version"] -> {
 		put[help -> func -> VersionFunction() <-]
 	} else -> { statement[#uptime] } <-
 #check_version <-
 
 #exit ->
-	if[var(input_word) == var(exit)] -> {
+	if[var(input_word) == "exit"] -> {
 		print(string) -> "Bye.."
 		
 		put[_defs -> Slashn <-]
@@ -51,7 +51,7 @@ func -> Execute() {
 #exit <-
 
 #check_command ->
-	if[var(input_word) == var(username)] -> {
+	if[var(input_word) == "username"] -> {
 		print(spec) -> __USERNAME__ <-
 		put[_defs -> Slashn <-]
 	} else -> {
