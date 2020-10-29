@@ -7,6 +7,8 @@
 
 except(version) : 0.3 -> { error("Install new version of FlaScript") print(newline) } version;
 
+import("Types.flsh") -> defs <-
+
 func -> HelpFunction() {
 	print(colorized[:1, 33:]) -> "[GENERAL]" <-
 	print(newline)
@@ -24,3 +26,20 @@ func -> HelpFunction() {
 	
 	print(newline)
 } HelpFunction;
+
+func -> VersionFunction() {
+	print(colorized[:11, 96:]) -> "Fegeya FlaSh Version: " <-
+		
+	print(rcolorized[:1, 91:])
+		
+	put[defs -> Flash_Version <-]
+		
+	put[defs -> Slashn <-]
+	
+	print(colorized[:1, 95:]) -> "Fegeya FlaScript Version: " <-
+	
+	print(rcolorized[:1, 92:])
+	print(spec) -> FLASCRIPT_VERSION <-
+	
+	put[defs -> Slashn <-]
+} VersionFunction;
