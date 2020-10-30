@@ -17,12 +17,22 @@ func -> Execute() {
 	executepp("FlaSh", var(input_word))
 } Execute;
 
+#title_function -> 
+    if[find(var(input_word), "title ")] -> {
+        @substring -> input_word -> title  <
+        print(dynamic) -> set[title] -> var(input_word) <-
+        @equal -> input_word ->    <
+    } else -> {        
+        /> Call Execute() (another command) </	
+		func -> Execute()
+    } <-
+#title_function <-
+
 #help_function ->
 	if[var(input_word) == "help"] -> {
 		put[help -> func -> HelpFunction() <-]
 	} else -> {
-		/> Call Execute() (another command) </	
-		func -> Execute()
+        statement[#title_function]        
 	} <-
 #help_function <-
 
