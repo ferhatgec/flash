@@ -70,7 +70,7 @@ func -> Execute() {
 #check_command <-
 
 #buffer_loop ->
-	while[var(int) -> loopVal <- (==) var(int) -> 3.14 <-] -> {
+	while[var(loopVal) == "3.14"] -> {
 		func -> TerminalBuffer()
 		
 		/> Colorize input */
