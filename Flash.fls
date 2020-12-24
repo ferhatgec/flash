@@ -77,7 +77,7 @@ func -> Execute() {
 		print(rcolorized[:1, 92:])
 		
 		/> Get input </
-		@input -> input_word <
+		@input(string) -> input_word <
 		
 		/> Colorize output </
 		print(rcolorized[:1, 31:])
