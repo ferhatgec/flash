@@ -1,16 +1,68 @@
-/> MIT License
-#
-# Copyright (c) 2020 Ferhat Geçdoğan All Rights Reserved.
-# Distributed under the terms of the MIT License.
-# 
-</
+#!/usr/bin/env fla --b
 
-/> Check version of FlaScript (Required latest version) </
+// MIT License
+// 
+// Copyright (c) 2020-2021 Ferhat Geçdoğan All Rights Reserved.
+// Distributed under the terms of the MIT License.
+// 
+//
+
+// Check version of FlaScript (Required latest version)
 except(version) : 0.3 -> { error("Install new version of FlaScript") print(newline) } version;
 
-import("Types.flsh") -> _defs <-
-import("Tools.flsh") -> tools <- 
-import("HelpFunction.flsh") -> help <-
+// Definitions
+defin[Flash_Version] -> print(string) -> "0.1-beta-1" <-
+
+defin[Slashn] -> print(newline) <-
+defin[Input_Sign] -> print(string) -> " $# " <-
+
+func -> Welcome() {
+	print(colorized[:11, 35:]) -> "Welcome, " <-
+	
+	print(rcolorized[:1, 36:])
+	print(spec) -> __USERNAME__ <-
+
+	print(newline)
+} Welcome;
+
+// Reimplement to get time from /proc/uptime
+func -> Uptime() {
+	print(rcolorized[:1, 95:]) -> "Uptime: "  <-
+	print(spec) -> __UPTIME__ <-
+
+	print(newline)
+} Uptime;
+
+func -> HelpFunction() {
+	print(colorized[:1, 33:]) -> "[GENERAL]" <-
+	print(newline)
+	
+	print(rcolorized[:1, 95:])
+	
+	print(string) -> "uptime: Show uptime of system\n"
+	
+	print(string) -> "username: Show username\n"
+	
+	print(string) -> "version: Show version of FlaSh"
+	print(colorized[:1, 0:]) -> "\n" <-
+} HelpFunction;
+
+func -> VersionFunction() {
+	print(colorized[:11, 96:]) -> "Fegeya FlaSh Version: " <-
+		
+	print(rcolorized[:1, 91:])
+		
+	put[Flash_Version]
+		
+	print(newline)
+	
+	print(colorized[:1, 95:]) -> "Fegeya FlaScript Version: " <-
+	
+	print(rcolorized[:1, 92:])
+	print(spec) -> FLASCRIPT_VERSION <-
+	
+	print(newline)
+} VersionFunction;
 
 func -> Execute() {
 	/> Get reference of input word */
@@ -20,7 +72,9 @@ func -> Execute() {
 #title_function -> 
     if[find(var(input_word), "title ")] -> {
         @substring -> input_word -> title  <
+
         print(dynamic) -> set[title] -> var(input_word) <-
+
         @equal -> input_word ->    <
     } else -> {        
         /> Call Execute() (another command) </	
@@ -30,15 +84,15 @@ func -> Execute() {
 
 #help_function ->
 	if[var(input_word) == "help"] -> {
-		put[help -> func -> HelpFunction() <-]
+		func -> HelpFunction()
 	} else -> {
-        statement[#title_function]        
+        	statement[#title_function]        
 	} <-
 #help_function <-
 
 #uptime ->
 	if[var(input_word) == "uptime"] -> {
-		put[tools -> func -> Uptime() <-]
+		func -> Uptime()
 	} else -> {
 		statement[#help_function]
 	} <-
@@ -46,15 +100,13 @@ func -> Execute() {
 
 #check_version ->
 	if[var(input_word) == "version"] -> {
-		put[help -> func -> VersionFunction() <-]
+		func -> VersionFunction()
 	} else -> { statement[#uptime] } <-
 #check_version <-
 
 #exit ->
 	if[var(input_word) == "exit"] -> {
-		print(string) -> "Bye.."
-		
-		put[_defs -> Slashn <-]
+		print(string) -> "Bye..\n"
 		
 		exit(success)
 	} else -> { statement[#check_version] } <-
@@ -63,7 +115,8 @@ func -> Execute() {
 #check_command ->
 	if[var(input_word) == "username"] -> {
 		print(spec) -> __USERNAME__ <-
-		put[_defs -> Slashn <-]
+
+		print(newline)
 	} else -> {
 		statement[#exit]		
 	} <-
@@ -85,7 +138,7 @@ func -> Execute() {
 		/> Check inputted value </
 		statement[#check_command]
 	} else -> {
-		print(string) -> "Failed."
+		print(string) -> "Failed.\n"
 	} <-
 #buffer_loop <-
 
@@ -96,31 +149,32 @@ func -> TerminalBuffer() {
 	
 	print(rcolorized[:11, 92:])
 	
-	print(string) -> "~>"
+	print("~>")
 	
 	print(rcolorized[:11, 93:])
 	print(spec) -> __HOSTNAME__ <-
 
-	print(string) -> " ~"
+	print(" ~")
 		
 	print(rcolorized[:11, 94:])
 	@echo -> current_dir <-
 	
 	print(rcolorized[:11, 97:])
 	
-	put[_defs -> Input_Sign <-]
+	put[Input_Sign]
 	
-	print(string) -> " "
+	print(" ")
 	
 } TerminalBuffer;
 	
 main() -> main {
-        func -> Welcome() : tools <
+    func -> Welcome()
+	
 	var(int) -> 3.14 -> loopVal <-
 	var(string) -> blah blah -> input_word <- 
 	var(string) -> (func) getenv -> "PWD" (end) -> current_dir <- 
 	
 	statement[#buffer_loop]
 	
-	put[_defs -> Slashn <-]
+	print(newline)
 } main;
